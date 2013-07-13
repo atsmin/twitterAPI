@@ -13,7 +13,6 @@ function searchTweets($twObj, $options){
 		$options
 	);
 	$res_array = json_decode($json, true);
-	//var_dump($jset);	
 
 	//取得したツイートの表を生成
 	//表のヘッダ
@@ -35,9 +34,9 @@ EOD;
 		$name = hEscape($result['user']['name']);
 		$screnName = hEscape($result['user']['screen_name']);
 		$url = "http://twitter.com/".$screnName;
-		$nameHtml = "<a href=$url>$name</a>";
+		$nameHtml = "<a href=\"$url\" target=\"_blank\">$name</a>";
 
-		$tweet= hEscape($result['text']);
+		$tweet = hEscape($result['text']);
 
 		$imgLink = $result['user']['profile_image_url'];
 		$imgHtml = "<img src=\"$imgLink\" width=70 heght=70>";
@@ -48,9 +47,13 @@ EOD;
 		$jpTime = date("Y-m-d H:i:s",$timestamp);
 
 		$placeName = hEscape($result['place']['full_name']);
-		$location= $result['geo']; 
-		$lati = hEscape($location['coordinates'][0]); //緯度
-		$longti = hEscape($location['coordinates'][1]); //経度
+		//placeが存在しない場合はuser_profileの'location'を場所として取得
+		if($placeName == ""){
+			$placeName = hEscape($result['user']['location']);
+		}
+		$geoCord = $result['geo']; 
+		$lati = hEscape($geoCord['coordinates'][0]); //緯度
+		$longti = hEscape($geoCord['coordinates'][1]); //経度
 
 //		$id = hEscape($result['id']);
 //		$reply_to = hEscape($result['in_reply_to_screen_name']);
@@ -137,7 +140,7 @@ $langPuldwnHtml .= <<<EOD
 EOD;
 
 //検索条件の指定
-$options = array('q'=>$sWord,'count'=>$sCount,'lang'=>$sLang);
+$options = array('q'=>$sWord,'count'=>$sCount,'lang'=>$sLang);//,'geocode'=>$geoCord);
 
 //検索結果のHTMLを取得
 $twtTableHtml ="";
