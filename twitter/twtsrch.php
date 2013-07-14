@@ -1,7 +1,9 @@
 <?php
-
 //OAUth認証用ライブラリ
 require_once("twitteroauth.php");
+
+//共通関数の読み込み
+require_once("common.php");
 
 //関数の定義
 function searchTweets($twObj, $options){
@@ -25,7 +27,7 @@ function searchTweets($twObj, $options){
 	<th>ツイート</th>
 	<th>時刻</th>
 	<th>場所</th>
-	<th>緯度,経度</th>
+	<th>地図(googleMaps)</th>
 	</tr>\n
 EOD;
 
@@ -51,12 +53,19 @@ EOD;
 		if($placeName == ""){
 			$placeName = hEscape($result['user']['location']);
 		}
-		$geoCord = $result['geo']; 
-		$lati = hEscape($geoCord['coordinates'][0]); //緯度
-		$longti = hEscape($geoCord['coordinates'][1]); //経度
+		$geoCode = $result['geo']; 
+		$lati = hEscape($geoCode['coordinates'][0]); //緯度
+		$lngti = hEscape($geoCode['coordinates'][1]); //経度
+		//場所をgoogleMapsで表示する
+		if($lati != "" && $lngti != ""){
+			$gMapsHtml = "<a href=\"googleMaps.php?lati=$lati&lngti=$lngti\" onclick=\"window.open(this.href,'null','width=400,height=400,menubar=no,toolbar=no,location=no'); return false;\">
+				地図</a>";
+		}else{
+			$gMapsHtml = "";
+		}
 
-//		$id = hEscape($result['id']);
-//		$reply_to = hEscape($result['in_reply_to_screen_name']);
+//	$id = hEscape($result['id']);
+//	$reply_to = hEscape($result['in_reply_to_screen_name']);
 
 		$twtTableHtml .= <<<EOD
 	<tr>
@@ -65,7 +74,7 @@ EOD;
 	<td>$tweet</td>
 	<td>$jpTime</td>
 	<td>$placeName</td>
-	<td>$lati, $longti</td>
+	<td>$gMapsHtml</td>
 	</tr>\n
 EOD;
 	}
@@ -74,12 +83,6 @@ EOD;
 EOD;
 
 	return $twtTableHtml;
-}
-
-//htmlspecialcharsの別名
-function hEscape($str){
-	$result = htmlspecialchars($str, ENT_QUOTES);
-	return $result;
 }
 
 //処理の開始
@@ -140,7 +143,8 @@ $langPuldwnHtml .= <<<EOD
 EOD;
 
 //検索条件の指定
-$options = array('q'=>$sWord,'count'=>$sCount,'lang'=>$sLang);//,'geocode'=>$geoCord);
+//$geoCode = "34,130,100km";
+$options = array('q'=>$sWord,'count'=>$sCount,'lang'=>$sLang);//,'geocode'=>$geoCode);
 
 //検索結果のHTMLを取得
 $twtTableHtml ="";
@@ -148,18 +152,19 @@ if($sWord != ""){
 	$twtTableHtml = searchTweets($twObj, $options);
 }	 
 
-//出力するhtmlの生成
-$html = "";
-$html = <<<EOD
+//htmlの出力
+print <<<EOD
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
 <html>
 <head>
 	<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+	<meta http-equiv="Content-Script-Type" content="text/javascript">
 	<meta name="author" content="aminami">
-	<title>Twitter Search API</title>
+	<script type="text/javascript" src="main.js"></script>
+	<title>Twitter Searcher</title>
 </head>
 <body>
-<h1>Twitter Search API</h1>
+<h1>Twitter Searcher</h1>
 <form action="" method="get">
 <div>検索ワード:<input type="text" name="sWord" size="20" value="$sWord" maxlength="255"></div>
 <div>取得ツイート数:<input type="text" name="sCount" size="3" value="$sCount"></div>
@@ -173,7 +178,4 @@ $twtTableHtml
 </body>
 </html>
 EOD;
-
-//ページの出力
-echo $html;
 ?>
