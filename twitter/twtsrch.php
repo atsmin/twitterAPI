@@ -88,9 +88,9 @@ EOD;
 //処理の開始
 //OAUth認証情報
 $consumerKey="gD8M8WAqzDPDrnbw38iUg";
-$consumerSecret="2z7EUUB6ojc7m1SP8wFO01Fvz6HfPuz6zDQElXbxac";
+$consumerSecret="";
 $accessToken="194930173-UVbTACbN3fHr06H6aag9Zw8P5kMKXgM2F8nFa29q";
-$accessTokenSecret="qKpGlks7D8sAOICldYaGb4K0HAyY4gr6CKjB7eMdY";
+$accessTokenSecret="";
  
 //twitterオブジェクトの生成
 $twObj = new TwitterOAuth(
