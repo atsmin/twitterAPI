@@ -1,0 +1,133 @@
+h1 {
+  padding-left: 10px; /* 左の余白 */
+  border-width: 0px 0px 2px 20px; /* 枠の幅 */
+  border-style: solid; /* 枠の種類 */
+  border-color: #6495ed; /* 枠の色 */
+  line-height: 100%; /* 行の高さ */
+}
+
+.headerText {
+  color: royalblue; /* 文字の色 */
+  width: 300px;
+  text-shadow:2px 2px 3px navy;
+  -moz-animation:anime2 1s infinite linear;
+  -webkit-animation:anime2 1s infinite linear;
+   animation:anime2 1s infinite linear;
+/*
+  -moz-animation:anime 3s infinite alternate linear;
+  -webkit-animation:anime 3s infinite alternate linear;
+   animation:anime 3s infinite alternate linear;
+*/
+}
+/*
+@-webkit-keyframes anime{
+	0%	{}
+	80%	{-webkit-transform: matrix(0, 0, 0, 0, 0, 0);}
+	100%	{-webkit-transform: matrix(-1, 0, 0, 1, 0, 0);}
+}
+
+@keyframes anime{
+	0%	{}
+	80%	{
+		transform: matrix(0, 0, 0, 0, 0, 0);
+		filter:progid:DXImageTransform.Microsoft.BasicImage(mirror=1);
+		}
+	100%	{
+		transform: matrix(-1, 0, 0, 1, 0, 0);
+		filter:progid:DXImageTransform.Microsoft.BasicImage(mirror=1);
+		}
+}
+*/
+.subHeaderText {
+  width: 200px;
+  -moz-animation:anime2 1s infinite linear;
+  -webkit-animation:anime2 1s infinite linear;
+   animation:anime2 1s infinite linear;
+
+}
+
+@keyframes anime2 {
+  0%   { transform: rotate(0deg); }
+  25%   { transform: rotate(2deg); }
+  50%   { transform: rotate(0deg); }
+  75%  { transform: rotate(-2deg); }
+  100%  { transform: rotate(0deg); }
+}
+
+@-webkit-keyframes anime2 { /* Safari & Chrome */
+  0%   { -webkit-transform: rotate(0deg); }
+  25%  { -webkit-transform: rotate(2deg); }
+  50%  { -webkit-transform: rotate(0deg); }
+  75%  { -webkit-transform: rotate(-2deg); }
+  100% { -webkit-transform: rotate(0deg); }
+}
+
+h2 {
+  color: #000099; /* 文字の色 */
+  padding-left: 10px; /* 左の余白 */
+  border-width: 0px 0px 2px 20px; /* 枠の幅 */
+  border-style: solid; /* 枠の種類 */
+  border-color: #6495ed; /* 枠の色 */
+  line-height: 100%; /* 行の高さ */
+}
+
+h3 {
+  color: #000099; /* 文字の色 */
+  padding-left: 10px; /* 左の余白 */
+  border-width: 0px 0px 2px 20px; /* 枠の幅 */
+  border-style: solid; /* 枠の種類 */
+  border-color: #6495ed; /* 枠の色 */
+  line-height: 100%; /* 行の高さ */
+}
+
+.table {
+  background-color: #ffffff; /* 背景の色 */
+  width: 100%;
+}
+
+.table th {
+  color: #ffffff; /* 文字の色 */
+  background-color: #6495ed; /* 背景の色 */
+  border-style: double; /* 枠の種類 */
+  border-color: #6495ed; /* 枠の色 */
+  border-width: 4px; /* 枠の幅 */
+  text-align: center;
+  font-weight: bold;
+  font-size: 16px;
+  white-space: nowrap;
+}
+
+input.middle{
+	width: 100px;
+}
+
+input.small{
+	width: 50px;
+}
+
+.form-control {
+	margin: 5px;
+}
+
+.btn {
+	margin: 5px;
+}
+
+body,html{
+	font-family: "ヒラギノ角ゴ Pro W3", "Hiragino Kaku Gothic Pro", "メイリオ", Meiryo, Osaka, "ＭＳ Ｐゴシック", "MS PGothic", sans-serif;
+	width: 100%;
+	height: 100%;
+	padding: 10px;
+	padding-top: 0px;
+}
+
+div#map_canvas {
+	width: 100%;
+	height: 100%;
+	margin: 5px;
+}
+
+.userImage{
+	width: 70px;
+	height: 70px;
+}
